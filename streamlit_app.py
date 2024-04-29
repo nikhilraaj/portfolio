@@ -1,190 +1,216 @@
-
-import streamlit as st 
-from constant import *
-import numpy as np 
-import pandas as pd
+import streamlit as st
 from PIL import Image
-from streamlit_timeline import timeline
-import plotly.express as px
-import plotly.figure_factory as ff
-import requests
-import re
-import plotly.graph_objects as go
-import io
-import matplotlib.pyplot as plt
-import streamlit.components.v1 as components
-from graph_builder import *
-#import tensorflow as tf
-from streamlit_player import st_player
 
-st.set_page_config(page_title='mehul gupta\'s portfolio' ,layout="wide",page_icon='👨‍🔬')
+with open("style.css") as f:
+    st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
-st.sidebar.markdown(info['Stackoverflow_flair'],unsafe_allow_html=True)
+#####################
+# Header 
+st.write('''
+# Chanin Nantasenamat, Ph.D.
+##### *Resume* 
+''')
 
-st.header('My Debut book on Generative AI is out !!')
-st.info("""LangChain in your Pocket: Beginner's Guide to Building Generative AI Applications using LLMs""")
+image = Image.open('dp.png')
+st.image(image, width=150)
 
-st.image('images/book.png')
+st.markdown('## Summary', unsafe_allow_html=True)
+st.info('''
+- Experienced Educator, Researcher and Administrator with almost twenty years of experience in data-oriented environment and a passion for delivering insights based on predictive modeling. 
+- Strong verbal and written communication skills as demonstrated by extensive participation as invited speaker at `10` conferences as well as publishing 149 research articles.
+- Strong track record in scholarly research with H-index of `32` and total citation of 3200+.
+''')
 
-with st.expander("Book details"):
-    st.image('images/amazon.png')
-    st.markdown(book_details,unsafe_allow_html=True)
-with st.expander("How to buy?"):
-    for a,b in books.items():
-            st.markdown("""<a href={}><b><u>{}</b></u></a>""".format(b,a),unsafe_allow_html=True)
-            
-st.subheader('About me')
-st.write(info['Brief'])
-st.subheader('Career snapshot')
+#####################
+# Navigation
+
+st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
+
+st.markdown("""
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #16A2CB;">
+  <a class="navbar-brand" href="https://youtube.com/dataprofessor" target="_blank">Chanin Nantasenamat</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link disabled" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#education">Education</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#work-experience">Work Experience</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#bioinformatics-tools">Bioinformatics Tools</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#social-media">Social Media</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+""", unsafe_allow_html=True)
+
+#####################
+# Custom function for printing text
+def txt(a, b):
+  col1, col2 = st.columns([4,1])
+  with col1:
+    st.markdown(a)
+  with col2:
+    st.markdown(b)
+
+def txt2(a, b):
+  col1, col2 = st.columns([1,4])
+  with col1:
+    st.markdown(f'`{a}`')
+  with col2:
+    st.markdown(b)
+
+def txt3(a, b):
+  col1, col2 = st.columns([1,2])
+  with col1:
+    st.markdown(a)
+  with col2:
+    st.markdown(b)
   
-with st.spinner(text="Building line"):
-    with open('timeline.json', "r") as f:
-        data = f.read()
-        timeline(data, height=500)
+def txt4(a, b, c):
+  col1, col2, col3 = st.columns([1.5,2,2])
+  with col1:
+    st.markdown(f'`{a}`')
+  with col2:
+    st.markdown(b)
+  with col3:
+    st.markdown(c)
+
+#####################
+st.markdown('''
+## Education
+''')
+
+txt('**Doctor of Philosophy** (Medical Technology), *Mahidol University*, Thailand',
+'2002-2006')
+st.markdown('''
+- GPA: `3.89`
+- Research thesis entitled `Computer-aided molecular design for biological and chemical applications : Quantum chemical and machine learning approach`.
+- Received Royal Golden Jubilee Ph.D. Scholarship of `2.152 million THB` covering tuition and stipend.
+- Thesis awarded `1st` Prize by the National Research Council of Thailand.
+''')
+
+txt('**Bachelors of Science** (Biological Science), *Mahidol University International College*, Thailand',
+'1998-2002')
+st.markdown('''
+- GPA: `3.65`
+- Graduated with First Class Honors.
+''')
+
+#####################
+st.markdown('''
+## Work Experience
+''')
+
+txt('**Head, Center of Data Mining and Biomedical Informatics**, Faculty of Medical Technology, Mahidol University, Thailand',
+'2011-2021')
+st.markdown('''
+- Managing a Center of `10` professors, researchers and students to ensure KPIs are strategically achieved namely to publish at least `20+` research publications annually. 
+- Actively took part in the talent hiring process as well as help employees to plan and develop their career path.
+- Set budget and handle procurement in order to facilitate education and research activities. Secured `> 10 million THB` budget.
+- Set and reflect on OKR on an annual basis to ensure productivity strategically matches the organization's direction.
+''')
+
+txt('**Associate Professor**, Faculty of Medical Technology, Mahidol University, Thailand',
+'2012-2021')
+txt('**Assistant Professor**, Faculty of Medical Technology, Mahidol University, Thailand',
+'2009-2012')
+txt('**Lecturer**, Faculty of Medical Technology, Mahidol University, Thailand',
+'2006-2009')
+st.markdown('''
+- Provided mentorship and supervision to junior faculty, researchers, Ph.D./M.Sc./B.Sc. students. Mentored `3` Post-doctoral fellows, supervised `13` Ph.D. students, supervised `8` M.Sc. students, supervised `13` B.Sc. students and hosted `6` visiting students from U.S., Sweden and India.
+- Wrote and applied for research grants. Served as Principal Investigator for research grants that have been awarded `12.5 million THB` and `1.117 million SEK` in research funding from Thai and Swedish grant agencies.
+- Conducted research by applying machine learning to computational drug discovery and ensuring that research output exceeds `20+` articles per year.
+- Taught `10+` undergraduate/graduate classes on Bioinformatics, Data Mining, Scientific Research and Presentation, Research Methodology, Graduate Seminar, Programming for Health Data Science, etc.
+- Peer reviewed `100+` research articles for leading scientific journals.
+''')
+
+txt('**Co-Chair**, International Conference on Pharmaceutical Bioinformatics at Pattaya, Thailand',
+'2016')
+st.markdown('''
+- Oversee all aspects of the conference preparations from conception to launch. This include inviting keynote and plenary speakers, create advertisement flyers, create abstract book, etc.
+- Conference attracted `200+` participants from `40+` countries from university and industry sector.
+- Chaired keynote session, technical workshop and some of the parallel sessions.
+''')
+
+txt('**Content Creator**, [Data Professor YouTube Channel](https://youtube.com/dataprofessor/)',
+'2019-Present')
+st.markdown('''
+- `100,000+` subscribers on YouTube
+- Created `261` educational videos on data science, machine learning and bioinformatics as well as hosted several podcast episodes with data scientists.
+- Created `3` sponsored videos for Notion, Gradio and Classpert.
+''')
+
+txt('**Content Creator**, [Coding Professor YouTube Channel](https://youtube.com/codingprofessor/)',
+'2019-Present')
+st.markdown('''
+- `3,200+` subscribers on YouTube
+- Created `38` educational videos on Python and R programming.
+''')
+
+txt('**Technical Writer**, [Data Professor Blog](https://data-professor.medium.com/) on Medium.com',
+'2019-Present')
+st.markdown('''
+- `4,100+` subscribers on Medium
+- Written `68` technical blogs on data science, machine learning and bioinformatics.
+''')
+
+#####################
+st.markdown('''
+## Bioinformatics Tools
+''')
+txt4('ABCpred', 'A web server for the discovery of acetyl- and butyryl-cholinesterase inhibitors', 'http://codes.bio/abcpred/')
+txt4('AutoWeka', 'An automated data mining software based on Weka', 'http://www.mt.mahidol.ac.th/autoweka/')
+txt4('ACPred', 'A computational tool for the prediction and analysis of anticancer peptides','http://codes.bio/acpred/')
+txt4('BioCurator', 'A web server for curating ChEMBL bioactivity data', 'http://codes.bio/biocurator/')
+txt4('CryoProtect', 'A web server for classifying antifreeze proteins from non-antifreeze proteins','http://codes.bio/cryoprotect/')
+txt4('ERpred', 'A web server for the prediction of subtype-specific estrogen receptor antagonists', 'http://codes.bio/erpred')
+txt4('HCVpred', 'A web server for predicting the bioactivity of Hepatitis C virus NS5B inhibitors', 'http://codes.bio/hemopred/')
+txt4('HemoPred', 'A web server for predicting the hemolytic activity of peptides', 'http://codes.bio/hemopred/')
+txt4('iQSP', 'A sequence-based tool for the prediction and analysis of quorum sensing peptides', 'http://codes.bio/iqsp/')
+txt4('Meta-iAVP', 'A sequence-based meta-predictor for improving the prediction of antiviral peptides', 'http://codes.bio/meta-iavp/')
+txt4('osFP', 'A web server for predicting the oligomeric state of fluorescent proteins', 'http://codes.bio/osfp/')
+txt4('PAAP', 'A web server for predicting antihypertensive activity of peptides', 'http://codes.bio/paap/')
+txt4('PepBio', 'A web server for predicting the bioactivity of host defense peptide', 'http://codes.bio/pepbio')
+txt4('PyBact', 'Open source software written in Python for bacterial identification', 'https://sourceforge.net/projects/pybact/')
+txt4('TargetAntiAngio', 'A sequence-based tool for the prediction and analysis of anti-angiogenic peptides','http://codes.bio/targetantiangio/')
+txt4('ThalPred', 'Development of decision model for discriminating Thalassemia trait and Iron deficiency anemia','http://codes.bio/thalpred/')
+txt4('THPep', 'A web server for predicting tumor homing peptides','http://codes.bio/thpep/')
 
 
-st.subheader('Skills & Tools ⚒️')
-def skill_tab():
-    rows,cols = len(info['skills'])//skill_col_size,skill_col_size
-    skills = iter(info['skills'])
-    if len(info['skills'])%skill_col_size!=0:
-        rows+=1
-    for x in range(rows):
-        columns = st.columns(skill_col_size)
-        for index_ in range(skill_col_size):
-            try:
-                columns[index_].button(next(skills))
-            except:
-                break
-with st.spinner(text="Loading section..."):
-    skill_tab()
+#####################
+st.markdown('''
+## Skills
+''')
+txt3('Programming', '`Python`, `R`, `Linux`')
+txt3('Data processing/wrangling', '`SQL`, `pandas`, `numpy`')
+txt3('Data visualization', '`matplotlib`, `seaborn`, `plotly`, `altair`, `ggplot2`')
+txt3('Machine Learning', '`scikit-learn`')
+txt3('Deep Learning', '`TensorFlow`')
+txt3('Web development', '`Flask`, `HTML`, `CSS`')
+txt3('Model deployment', '`streamlit`, `gradio`, `R Shiny`, `Heroku`, `AWS`, `Digital Ocean`')
 
-
-st.subheader('Education 📖')
-
-fig = go.Figure(data=[go.Table(
-    header=dict(values=list(info['edu'].columns),
-                fill_color='paleturquoise',
-                align='left',height=65,font_size=20),
-    cells=dict(values=info['edu'].transpose().values.tolist(),
-               fill_color='lavender',
-               align='left',height=40,font_size=15))])
-
-fig.update_layout(width=750, height=400)
-st.plotly_chart(fig)
-st.subheader('Research Papers 📝')
-
-def plot_bar():
-    
-    st.info('Comparing Brute Force approach with the algorithms')
-    temp1 = rapid_metrics.loc[['Brute-Force_Printed','printed'],:].reset_index().melt(id_vars=['category'],value_vars=['precision','recall','f1_score'],var_name='metrics',value_name='%').reset_index()
-    
-    temp2 = rapid_metrics.loc[['Brute-Force_Handwritten','handwritten'],:].reset_index().melt(id_vars=['category'],value_vars=['precision','recall','f1_score'],var_name='metrics',value_name='%').reset_index()
-    
-    cols = st.columns(2)
-    
-    fig = px.bar(temp1, x="metrics", y="%", 
-             color="category", barmode = 'group')
-     
-    cols[0].plotly_chart(fig,use_container_width=True)
-    
-    fig = px.bar(temp2, x="metrics", y="%", 
-             color="category", barmode = 'group')
-    cols[1].plotly_chart(fig,use_container_width=True)
-    
-    
-
-def image_and_status_loader(image_list,index=0):
-    if index==0:
-        img = Image.open(image_list[0]['path'])
-        st.image(img,caption=image_list[0]['caption'],width=image_list[0]['width'])
-       
-    else:
-        st.success('C-Cube algorithm for printed prescriptions')
-        rapid_metrics.loc[['Brute-Force_Printed','printed'],:].plot(kind='bar')
-        cols = st.columns(3)
-        for index_,items in enumerate(image_list[0]):
-            cols[index_].image(items['path'],caption=items['caption'],use_column_width=True)
-     
-        
-        st.success('3 step filtering algorithm for handwritten algorithms')
-        cols = st.columns(3)
-        for index_,items in enumerate(image_list[1]):
-            cols[index_].image(items['path'],caption=items['caption'],use_column_width=True)
-        
-        plot_bar()
-        
-        
-
-def paper_summary(index):
-    st.markdown('<h5><u>'+paper_info['name'][index]+'</h5>',unsafe_allow_html=True)
-    st.caption(paper_info['role'][index])
-    st.caption(paper_info['journal'][index]+' , '+paper_info['publication'][index]+' , '+paper_info['year'][index])
-    with st.expander('detailed description'):
-        with st.spinner(text="Loading details..."):
-                st.write(paper_info['Summary'][index])
-                pdfFileObj = open('pdfs/{}'.format(paper_info['file'][index]), 'rb')
-                image_and_status_loader(paper_info['images'][str(index)], index)
-                if index==0:
-                    rpa_metrics['time_improvement'] = rpa_metrics['non-ds']-rpa_metrics['ds']
-                    st.markdown('**Time taken per order involving Rx in seconds** (green indicates improvements from baseline)')
-                    cols = st.columns(3)
-                    for index_, row in rpa_metrics.iterrows():
-                        cols[index_].metric(row['category'],str(row['ds'])+'s',delta=str(round(row['time_improvement'],1))+'s' )
-                st.download_button('download paper',pdfFileObj,file_name=paper_info['file'][index],mime='pdf')
-    
-
-
-paper_summary(0)
-paper_summary(1)
-
-st.subheader('Achievements 🥇')
-achievement_list = ''.join(['<li>'+item+'</li>' for item in info['achievements']])
-st.markdown('<ul>'+achievement_list+'</ul>',unsafe_allow_html=True)
-
-
-st.subheader('Medium Profile ✍️')
-st.markdown("""<a href={}> access full profile here</a>""".format(info['Medium']),unsafe_allow_html=True)
-
-try:
-        page1,page2 = requests.get(info['Medium']), requests.get(info['publication_url'])
-        
-        followers = re.findall('(\d+\.\d+[kK]?) Followers',page1.text)[0]
-        pub_followers = re.findall('Followers (?:\w+\s+){4}(\d+)',re.sub('\W+',' ', page2.text ))[0]
-        
-        cols = st.columns(2)
-        cols[0].metric('Followers',followers)
-        cols[1].metric('Publication followers',pub_followers)
-except:
-    pass
-
-with st.expander('read my latest blogs below'):
-    components.html(embed_component['medium'],height=500)
-
-st.subheader('Youtube ▶️')
-st.markdown("""<a href={}> access channel here</a>""".format(info['youtube_url']),unsafe_allow_html=True)
-page1,page2 = requests.get(info['youtube_url']), requests.get(info['youtube_about'])
-subs = re.findall('(\d+\.\d+[kK]?) subscribers',page1.text)[0]
-videos = re.findall( r'"videosCountText".*?"text":"(\d+)"',page1.text)[0]
-
-cols = st.columns(2)
-cols[0].metric('Subscribers',subs)
-cols[1].metric('Videos',videos)
-        
-st.subheader('Daily routine as Data Scientist')
-st.graphviz_chart(graph)
-
-st.sidebar.caption('Wish to connect?')
-st.sidebar.write('📧: mehulgupta2016154@gmail.com')
-
-pdfFileObj = open('pdfs/mehul_gupta_resume.pdf', 'rb')
-st.sidebar.download_button('download resume',pdfFileObj,file_name='mehul_gupta_resume.pdf',mime='pdf')
-
-
-
-        
-
-        
-        
-    
-    
+#####################
+st.markdown('''
+## Social Media
+''')
+txt2('LinkedIn', 'https://www.linkedin.com/in/chanin-nantasenamat')
+txt2('Twitter', 'https://twitter.com/thedataprof')
+txt2('GitHub', 'https://github.com/chaninn/')
+txt2('', 'https://github.com/chaninlab/')
+txt2('', 'https://github.com/dataprofessor')
+txt2('ORCID', 'http://orcid.org/0000-0003-1040-663X')
+txt2('Scopus', 'http://www.scopus.com/authid/detail.url?authorId=12039071300')
+txt2('ResearcherID', 'http://www.researcherid.com/rid/F-1021-2010')
+txt2('ResearchGate', 'https://www.researchgate.net/profile/Chanin_Nantasenamat')
+txt2('Publons', 'https://publons.com/a/303133/')
