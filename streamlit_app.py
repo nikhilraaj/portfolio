@@ -34,19 +34,24 @@ def show_projects_page():
     project1 = {
         "title": "Project 1",
         "description": "This is a dummy project description.",
+        "image": "https://via.placeholder.com/150",
         "link": "https://example.com/project1"
     }
 
     project2 = {
         "title": "Project 2",
         "description": "This is another dummy project description.",
+        "image": "https://via.placeholder.com/150",
         "link": "https://example.com/project2"
     }
 
     projects = [project1, project2]
 
     for project in projects:
-        st.write(f"**{project['title']}**: {project['description']} ([Link]({project['link']}))")
+        st.subheader(project['title'])
+        st.image(project['image'], use_column_width=True)
+        st.write(project['description'])
+        st.write(f"[Link]({project['link']})")
 
 def show_contact_page():
     st.header("Contact Me")
